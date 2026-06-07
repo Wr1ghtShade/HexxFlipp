@@ -45,7 +45,7 @@ export const StatusBar: React.FC<StatusBarProps> = ({ state, isFileLoaded, versi
         )}
       </div>
       <div>
-        <span>Antigravity // HexFlipp v{version}</span>
+        <span>HexxFlipp v{version}</span>
       </div>
     </footer>
   );
