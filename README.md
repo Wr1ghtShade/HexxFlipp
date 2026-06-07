@@ -8,17 +8,16 @@ Une web-app autonome qui transforme tes dumps Flipper en données lisibles, édi
 
 ## 📸 Aperçu
 
-### ⚡ Cyberpunk (défaut)
-![Thème Cyberpunk](docs/hexxflip-cyber.png)
-
-### 🌙 Dracula
-![Thème Dracula](docs/hexxflipp-dracula.png)
-
-### 🌑 Dark (sobre)
-![Thème Dark](docs/hexxflipp-dark.png)
-
-### ☀️ Light (clair)
-![Thème Light](docs/hexxflip-light.png)
+<table>
+  <tr>
+    <td align="center"><b>⚡ Cyberpunk (défaut)</b><br/><img src="docs/hexxflip-cyber.png" alt="Thème Cyberpunk" width="420"/></td>
+    <td align="center"><b>🌙 Dracula</b><br/><img src="docs/hexxflipp-dracula.png" alt="Thème Dracula" width="420"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>🌑 Dark (sobre)</b><br/><img src="docs/hexxflipp-dark.png" alt="Thème Dark" width="420"/></td>
+    <td align="center"><b>☀️ Light (clair)</b><br/><img src="docs/hexxflip-light.png" alt="Thème Light" width="420"/></td>
+  </tr>
+</table>
 
 ---
 
