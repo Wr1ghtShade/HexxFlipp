@@ -5,7 +5,7 @@
 import React from 'react';
 import {
   Save, RotateCcw, RotateCw, UploadCloud, Sun, Moon, Zap, Columns,
-  FileCode, Binary, Key
+  FileCode, Binary, Key, Eclipse
 } from 'lucide-react';
 import type { FileMode, HexEditorState } from '../types';
 import type { Theme } from '../hooks/useTheme';
@@ -185,6 +185,9 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
           </button>
           <button className={`mode-btn ${theme === 'dracula' ? 'active' : ''}`} onClick={() => onChangeTheme('dracula')} title="Thème Dracula">
             <Moon size={16} />
+          </button>
+          <button className={`mode-btn ${theme === 'dark' ? 'active' : ''}`} onClick={() => onChangeTheme('dark')} title="Thème Dark (sobre)">
+            <Eclipse size={16} />
           </button>
           <button className={`mode-btn ${theme === 'light' ? 'active' : ''}`} onClick={() => onChangeTheme('light')} title="Thème Clair">
             <Sun size={16} />

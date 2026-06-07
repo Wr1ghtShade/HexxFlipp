@@ -4,6 +4,30 @@ Toutes les évolutions notables du projet.
 
 ---
 
+## [1.0.10] — 2026-06-07
+### 📸 Documentation
+- Ajout de captures d'écran des 4 thèmes dans `docs/` (cyber, dracula, dark, light)
+- Intégration des screenshots au `README.md`
+
+---
+
+## [1.0.09] — 2026-06-07
+### 🎨 Nouveau thème
+- **Thème Dark** ajouté (sobre, type GitHub/VSCode Dark) :
+  - Palette grise neutre (bg `#0d1117`, accent bleu `#58a6ff`)
+  - Pas de néons ni d'effets glow — alternative discrète à Cyberpunk
+  - Icône `Eclipse` dans le sélecteur, positionnée entre Dracula et Light
+- `useTheme` : type `Theme` étendu + validation par `Set<Theme>` au lieu d'un OR-chain
+
+---
+
+## [1.0.08] — 2026-06-07
+### 🧹 Nettoyage
+- Suppression de la mention "Antigravity" dans la barre d'état (footer)
+- Footer simplifié : `HexxFlipp v{version}` (cohérent avec le nom du repo GitHub)
+
+---
+
 ## [1.0.07] — 2026-06-07
 ### 🏗 Refactor majeur — architecture modulaire
 - **`App.tsx` découpé de 1648 → 447 lignes** (-73 %), focus orchestration uniquement

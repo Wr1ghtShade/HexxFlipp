@@ -6,6 +6,22 @@ Une web-app autonome qui transforme tes dumps Flipper en données lisibles, édi
 
 ---
 
+## 📸 Aperçu
+
+### ⚡ Cyberpunk (défaut)
+![Thème Cyberpunk](docs/hexxflip-cyber.png)
+
+### 🌙 Dracula
+![Thème Dracula](docs/hexxflipp-dracula.png)
+
+### 🌑 Dark (sobre)
+![Thème Dark](docs/hexxflipp-dark.png)
+
+### ☀️ Light (clair)
+![Thème Light](docs/hexxflip-light.png)
+
+---
+
 ## ✨ Fonctionnalités
 
 - 📡 **NFC** — Décodage Mifare Classic 1K/4K, NTAG/Ultralight, DESFire (UID, clés A/B, bits d'accès C1/C2/C3, secteurs)
@@ -16,7 +32,7 @@ Une web-app autonome qui transforme tes dumps Flipper en données lisibles, édi
 - 📻 **Sub-GHz** — Visualisation impulsions RAW, presets, fréquences
 - 🔀 **Mode diff** — Comparaison A/B côte à côte avec surlignage des différences
 - ↩️ **Undo / redo** (50 étapes), recherche hex/ASCII, pagination
-- 🎨 **3 thèmes** — Cyberpunk, Dracula, Clair
+- 🎨 **4 thèmes** — Cyberpunk, Dracula, Dark, Clair
 - 📦 **Single-file** — `dist/index.html` autonome, ouvrable en double-clic, **100% offline**
 
 ---
