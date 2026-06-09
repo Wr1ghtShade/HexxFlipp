@@ -20,7 +20,7 @@ import { isFileTooLarge, MAX_FILE_SIZE, formatBytes } from './limits';
 export class FileTooLargeError extends Error {
   readonly file: File;
   constructor(file: File) {
-    super(`Fichier trop volumineux : ${formatBytes(file.size)} (max ${formatBytes(MAX_FILE_SIZE)})`);
+    super(`File too large: ${formatBytes(file.size)} (max ${formatBytes(MAX_FILE_SIZE)})`);
     this.name = 'FileTooLargeError';
     this.file = file;
   }
@@ -37,12 +37,12 @@ export function readFile(file: File): Promise<{ name: string; content: string | 
 
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onerror = () => reject(new Error(`Erreur de lecture du fichier "${file.name}"`));
-    reader.onabort = () => reject(new Error(`Lecture annulée pour "${file.name}"`));
+    reader.onerror = () => reject(new Error(`Error reading file "${file.name}"`));
+    reader.onabort = () => reject(new Error(`Read cancelled for "${file.name}"`));
     reader.onload = (e) => {
       const result = e.target?.result;
       if (result === null || result === undefined) {
-        reject(new Error(`Contenu vide pour "${file.name}"`));
+        reject(new Error(`Empty content for "${file.name}"`));
         return;
       }
       resolve({ name: file.name, content: result });

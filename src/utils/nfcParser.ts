@@ -257,62 +257,62 @@ export function decodeSector(card: MifareClassicCard, sectorIndex: number): Deco
 
     if (isTrailer) {
       // Bloc Trailer (Bloc 3)
-      desc = `Remorque du secteur (Block ${globalBlockIndex})`;
+      desc = `Sector Trailer (Block ${globalBlockIndex})`;
       switch (code) {
         case '000':
           read = 'Jamais';
-          write = 'Clé A (Key A) | Clé B (Key A)';
-          increment = 'Bits d\'accès (Key A)';
+          write = 'Key A | Key B (Key A)';
+          increment = 'Access Bits (Key A)';
           decrement = 'Jamais';
-          desc += ' - Écritures clés par Key A, bits lecture seule';
+          desc += ' - Key writes by Key A, access bits read-only';
           break;
         case '010':
           read = 'Jamais';
           write = 'Jamais';
-          increment = 'Bits d\'accès (Key A)';
+          increment = 'Access Bits (Key A)';
           decrement = 'Jamais';
-          desc += ' - Clés verrouillées, bits lecture seule (A)';
+          desc += ' - Keys locked, access bits read-only (A)';
           break;
         case '100':
           read = 'Jamais';
-          write = 'Clé A (Key B) | Clé B (Key B)';
-          increment = 'Bits d\'accès (Key A ou B)';
+          write = 'Key A | Key B (Key B)';
+          increment = 'Access Bits (Key A or B)';
           decrement = 'Jamais';
-          desc += ' - Écritures clés par Key B, bits lecture seule';
+          desc += ' - Key writes by Key B, access bits read-only';
           break;
         case '110':
           read = 'Jamais';
           write = 'Jamais';
-          increment = 'Bits d\'accès (Key A ou B)';
+          increment = 'Access Bits (Key A or B)';
           decrement = 'Jamais';
-          desc += ' - Clés verrouillées, bits lecture seule (A/B)';
+          desc += ' - Keys locked, access bits read-only (A/B)';
           break;
         case '001':
           read = 'Jamais';
-          write = 'Clé A (Key A) | Clé B (Key A)';
-          increment = 'Bits d\'accès (Key A)';
-          decrement = 'Bits d\'accès (Key A)';
-          desc += ' - Config standard (Key A gère tout)';
+          write = 'Key A | Key B (Key A)';
+          increment = 'Access Bits (Key A)';
+          decrement = 'Access Bits (Key A)';
+          desc += ' - Standard config (Key A manages all)';
           break;
         case '011':
           read = 'Jamais';
-          write = 'Clé A (Key B) | Clé B (Key B)';
-          increment = 'Bits d\'accès (Key A ou B)';
-          decrement = 'Bits d\'accès (Key B)';
-          desc += ' - Key B gère tout (Clés & Bits)';
+          write = 'Key A | Key B (Key B)';
+          increment = 'Access Bits (Key A or B)';
+          decrement = 'Access Bits (Key B)';
+          desc += ' - Key B manages everything (Keys & Bits)';
           break;
         case '101':
           read = 'Jamais';
           write = 'Jamais';
-          increment = 'Bits d\'accès (Key A ou B)';
-          decrement = 'Bits d\'accès (Key B)';
-          desc += ' - Bits modifiables par Key B, clés verrouillées';
+          increment = 'Access Bits (Key A or B)';
+          decrement = 'Access Bits (Key B)';
+          desc += ' - Access bits modifiable by Key B, keys locked';
           break;
         case '111':
         default:
           read = 'Jamais';
           write = 'Jamais';
-          increment = 'Bits d\'accès (Key A ou B)';
+          increment = 'Access Bits (Key A or B)';
           decrement = 'Jamais';
           desc += ' - Entièrement verrouillé en écriture';
           break;
@@ -326,21 +326,21 @@ export function decodeSector(card: MifareClassicCard, sectorIndex: number): Deco
           write = 'Key A ou B';
           increment = 'Key A ou B';
           decrement = 'Key A ou B';
-          desc += ' - Lecture/Écriture standard';
+          desc += ' - Standard Read/Write';
           break;
         case '010':
           read = 'Key A ou B';
           write = 'Jamais';
           increment = 'Jamais';
           decrement = 'Jamais';
-          desc += ' - Lecture seule';
+          desc += ' - Read only';
           break;
         case '100':
           read = 'Key A ou B';
           write = 'Key B';
           increment = 'Jamais';
           decrement = 'Jamais';
-          desc += ' - Écriture restreinte à Key B';
+          desc += ' - Write restricted to Key B';
           break;
         case '110':
           read = 'Key A ou B';
@@ -361,14 +361,14 @@ export function decodeSector(card: MifareClassicCard, sectorIndex: number): Deco
           write = 'Key B';
           increment = 'Jamais';
           decrement = 'Jamais';
-          desc += ' - Lecture/Écriture Key B uniquement';
+          desc += ' - Read/Write Key B only';
           break;
         case '101':
           read = 'Key B';
           write = 'Jamais';
           increment = 'Jamais';
           decrement = 'Jamais';
-          desc += ' - Lecture seule Key B uniquement';
+          desc += ' - Read only Key B only';
           break;
         case '111':
         default:

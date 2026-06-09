@@ -132,10 +132,10 @@ export const SubGhzConsole: React.FC<SubGhzConsoleProps> = ({ card, onChangeCard
 
           <div style={{ flex: 1 }}>
             <h2 style={{ fontSize: '1.1rem', fontWeight: 'bold', marginBottom: '0.3rem', color: 'var(--text-primary)' }}>
-              Console Radio Sub-Ghz
+              Sub-GHz Radio Console
             </h2>
             <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
-              Visualisez le spectre des timings radio et gérez la transmission. Le signal RAW est composé d'une succession d'états hauts (positifs) et bas (négatifs) mesurés en microsecondes.
+              Visualise the radio timing spectrum and manage transmission. The RAW signal consists of a sequence of high (positive) and low (negative) states measured in microseconds.
             </p>
 
             <button 
@@ -145,17 +145,17 @@ export const SubGhzConsole: React.FC<SubGhzConsoleProps> = ({ card, onChangeCard
               disabled={isTransmitting}
             >
               <Zap size={16} />
-              {isTransmitting ? 'Émission en cours...' : 'Transmettre le signal'}
+              {isTransmitting ? 'Transmitting...' : 'Transmit signal'}
             </button>
           </div>
         </div>
 
-        {/* Chronogramme Waveform */}
+        {/* Waveform Chronogram */}
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: 'var(--bg-dark-well)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '1rem', position: 'relative', minHeight: '260px' }}>
           
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
             <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--accent-cyan)' }}>
-              Chronogramme Waveform {rawTimes.length > 0 ? `(Visuel : index ${currentPan} à ${currentPan + zoom - 1})` : ''}
+              Waveform Chronogram {rawTimes.length > 0 ? `(View: index ${currentPan} to ${currentPan + zoom - 1})` : ''}
             </span>
             
             {/* Outils de Zoom */}
@@ -164,7 +164,7 @@ export const SubGhzConsole: React.FC<SubGhzConsoleProps> = ({ card, onChangeCard
                 <button 
                   className="btn btn-icon" 
                   onClick={() => setZoom(z => Math.max(10, Math.round(z / 1.5)))} 
-                  title="Zoom Avant"
+                  title="Zoom In"
                   style={{ padding: '2px 6px' }}
                 >
                   <ZoomIn size={14} />
@@ -172,7 +172,7 @@ export const SubGhzConsole: React.FC<SubGhzConsoleProps> = ({ card, onChangeCard
                 <button 
                   className="btn btn-icon" 
                   onClick={() => setZoom(z => Math.min(rawTimes.length, Math.round(z * 1.5)))} 
-                  title="Zoom Arrière"
+                  title="Zoom Out"
                   style={{ padding: '2px 6px' }}
                 >
                   <ZoomOut size={14} />
@@ -185,8 +185,8 @@ export const SubGhzConsole: React.FC<SubGhzConsoleProps> = ({ card, onChangeCard
           <div style={{ flex: 1, position: 'relative', minHeight: '120px', background: 'rgba(0,0,0,0.3)', borderRadius: '4px', border: '1px solid var(--border-subtle)', overflow: 'hidden' }}>
             {rawTimes.length === 0 ? (
               <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
-                <span>Aucune donnée temporelle RAW</span>
-                <span style={{ fontSize: '0.7rem' }}>Ce fichier contient une clé décodée statique.</span>
+                <span>No RAW timing data</span>
+                <span style={{ fontSize: '0.7rem' }}>This file contains a static decoded key.</span>
               </div>
             ) : (
               <svg width="100%" height="100%" viewBox="0 0 1000 100" preserveAspectRatio="none" style={{ display: 'block' }}>
@@ -253,9 +253,9 @@ export const SubGhzConsole: React.FC<SubGhzConsoleProps> = ({ card, onChangeCard
           {/* Pied de chronogramme */}
           {rawTimes.length > 0 && (
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: '0.4rem' }}>
-              <span>Début capture (Pulse #{currentPan})</span>
-              <span>Zoom : {zoom} pulses visibles</span>
-              <span>Fin capture (Pulse #{currentPan + zoom - 1})</span>
+              <span>Start (Pulse #{currentPan})</span>
+              <span>Zoom: {zoom} visible pulses</span>
+              <span>End (Pulse #{currentPan + zoom - 1})</span>
             </div>
           )}
         </div>
@@ -264,11 +264,11 @@ export const SubGhzConsole: React.FC<SubGhzConsoleProps> = ({ card, onChangeCard
       {/* 2. Zone Droite : Sidebar de Configuration */}
       <div className="sidebar" style={{ width: '380px', flexShrink: 0 }}>
         <div className="panel">
-          <h3 className="panel-title">Paramètres Radio</h3>
+          <h3 className="panel-title">Radio Settings</h3>
 
           {/* Fréquence */}
           <div className="form-group">
-            <label className="form-label">Fréquence porteuse (Hz)</label>
+            <label className="form-label">Carrier Frequency (Hz)</label>
             <input
               type="number"
               className="form-input"
@@ -276,7 +276,7 @@ export const SubGhzConsole: React.FC<SubGhzConsoleProps> = ({ card, onChangeCard
               onChange={(e) => handleParamChange('frequency', parseInt(e.target.value, 10) || 433920000)}
             />
             <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: '2px', display: 'block' }}>
-              Fréquences communes : 433 920 000 Hz, 868 350 000 Hz, 315 000 000 Hz.
+              Common frequencies: 433 920 000 Hz, 868 350 000 Hz, 315 000 000 Hz.
             </span>
           </div>
 
@@ -299,7 +299,7 @@ export const SubGhzConsole: React.FC<SubGhzConsoleProps> = ({ card, onChangeCard
 
           {/* Protocole */}
           <div className="form-group">
-            <label className="form-label">Protocole de codage</label>
+            <label className="form-label">Encoding Protocol</label>
             <select
               className="form-input"
               value={card.protocol || 'RAW'}
@@ -315,7 +315,7 @@ export const SubGhzConsole: React.FC<SubGhzConsoleProps> = ({ card, onChangeCard
           {/* Nombre de Bits */}
           {card.protocol !== 'RAW' && card.bit !== undefined && (
             <div className="form-group">
-              <label className="form-label">Nombre de bits (Bit size)</label>
+              <label className="form-label">Number of bits (Bit size)</label>
               <input
                 type="number"
                 className="form-input"
@@ -328,7 +328,7 @@ export const SubGhzConsole: React.FC<SubGhzConsoleProps> = ({ card, onChangeCard
           {/* Clé Statique */}
           {card.protocol !== 'RAW' && card.key !== undefined && (
             <div className="form-group">
-              <label className="form-label">Clé de transmission (Key hex)</label>
+              <label className="form-label">Transmission Key (Key hex)</label>
               <input
                 type="text"
                 className="form-input"
@@ -343,22 +343,22 @@ export const SubGhzConsole: React.FC<SubGhzConsoleProps> = ({ card, onChangeCard
         {/* Panel Statistiques signal */}
         {stats && (
           <div className="panel">
-            <h3 className="panel-title">Statistiques Signal RAW</h3>
+            <h3 className="panel-title">RAW Signal Statistics</h3>
             <div style={{ fontSize: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', color: 'var(--text-secondary)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>Nombre d'impulsions (total) :</span>
+                <span>Total pulse count:</span>
                 <strong style={{ color: 'var(--text-primary)' }}>{stats.totalCount}</strong>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>Durée de capture estimée :</span>
+                <span>Estimated capture duration:</span>
                 <strong style={{ color: 'var(--accent-cyan)' }}>{stats.durationMs} ms</strong>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>Moyenne d'impulsion haute :</span>
+                <span>Average high pulse:</span>
                 <strong style={{ color: 'var(--accent-green)' }}>{stats.avgHigh} µs</strong>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>Moyenne d'impulsion basse :</span>
+                <span>Average low pulse:</span>
                 <strong style={{ color: 'var(--accent-red)' }}>{stats.avgLow} µs</strong>
               </div>
             </div>

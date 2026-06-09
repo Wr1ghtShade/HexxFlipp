@@ -60,8 +60,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
 
   const saveExt = SAVE_EXT_LABEL[state.fileMode];
   const saveLabel = saveExt
-    ? (state.isCompareMode ? `Sauvegarder A (${saveExt})` : `Sauvegarder (${saveExt})`)
-    : (state.isCompareMode ? 'Sauvegarder A' : 'Sauvegarder');
+    ? (state.isCompareMode ? `Save A (${saveExt})` : `Save (${saveExt})`)
+    : (state.isCompareMode ? 'Save A' : 'Save');
 
   const showNfcExtras = state.fileMode === 'nfc' && state.nfcCard;
   const showRawToNfcExport = state.fileMode === 'raw' && (state.fileSize === 1024 || state.fileSize === 4096);
@@ -73,7 +73,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
         <div className="logo-icon">H</div>
         <div className="title-container">
           <h1>HexFlipp</h1>
-          <p>Explorateur Hexadécimal & NFC Flipper</p>
+          <p>Hex &amp; NFC Flipper Explorer</p>
         </div>
       </div>
 
@@ -83,11 +83,11 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             <button
               className="btn"
               onClick={onOpenFile}
-              title="Ouvrir un autre fichier principal (Fichier A)"
+              title="Open another main file (File A)"
               style={{ borderColor: 'var(--accent-purple)', color: 'var(--accent-purple)' }}
             >
               <UploadCloud size={16} />
-              Ouvrir...
+              Open...
             </button>
 
             {showModeToggle && (
@@ -96,13 +96,13 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                   className={`mode-btn ${state.fileMode !== 'raw' ? 'active' : ''}`}
                   onClick={() => onModeToggle('nfc')}
                 >
-                  Analyseur Flipper
+                  Flipper Analyser
                 </button>
                 <button
                   className={`mode-btn ${state.fileMode === 'raw' ? 'active' : ''}`}
                   onClick={() => onModeToggle('raw')}
                 >
-                  Hex Brut
+                  Raw Hex
                 </button>
               </div>
             )}
@@ -110,21 +110,21 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             <button
               className={`btn btn-compare ${state.isCompareMode ? 'active' : ''}`}
               onClick={onToggleCompareMode}
-              title="Activer/Désactiver le mode comparaison (Diff)"
+              title="Enable/Disable compare mode (Diff)"
             >
               <Columns size={16} />
-              {state.isCompareMode ? 'Fermer Diff' : 'Comparer'}
+              {state.isCompareMode ? 'Close Diff' : 'Compare'}
             </button>
 
             {showKeysButton && (
               <button
                 className="btn"
                 onClick={onShowKeys}
-                title="Afficher la liste des clés A et B"
+                title="Show A and B key list"
                 style={{ color: 'var(--accent-cyan)', borderColor: 'var(--accent-cyan)', background: 'rgba(0, 242, 254, 0.05)' }}
               >
                 <Key size={16} />
-                Clés
+                Keys
               </button>
             )}
 
@@ -134,7 +134,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                 onClick={onUndo}
                 disabled={!canUndo}
                 style={{ border: 'none', background: 'transparent', padding: '4px 8px', opacity: canUndo ? 1 : 0.3 }}
-                title="Annuler (Ctrl+Z)"
+                title="Undo (Ctrl+Z)"
               >
                 <RotateCcw size={16} />
               </button>
@@ -143,19 +143,19 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                 onClick={onRedo}
                 disabled={!canRedo}
                 style={{ border: 'none', background: 'transparent', padding: '4px 8px', opacity: canRedo ? 1 : 0.3 }}
-                title="Rétablir (Ctrl+Y)"
+                title="Redo (Ctrl+Y)"
               >
                 <RotateCw size={16} />
               </button>
             </div>
 
-            <button className="btn btn-primary" onClick={onSave} title={`Enregistrer le fichier principal (${state.fileName || ''})`}>
+            <button className="btn btn-primary" onClick={onSave} title={`Save main file (${state.fileName || ''})`}>
               <Save size={16} />
               {saveLabel}
             </button>
 
             {showNfcExtras && (
-              <button className="btn" onClick={onExportToBinary} title="Exporter les blocs de données brutes en .bin">
+              <button className="btn" onClick={onExportToBinary} title="Export raw data blocks as .bin">
                 <Binary size={16} />
                 {state.isCompareMode ? 'Export .bin (A)' : 'Export .bin'}
               </button>
@@ -166,7 +166,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                 className="btn"
                 onClick={onExportToNfc}
                 style={{ borderColor: 'var(--accent-cyan)', color: 'var(--accent-cyan)' }}
-                title="Convertir et exporter en format NFC Flipper"
+                title="Convert and export as Flipper NFC format"
               >
                 <FileCode size={16} />
                 {state.isCompareMode ? 'Export .nfc (A)' : 'Export .nfc'}
@@ -174,22 +174,22 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             )}
 
             <button className="btn" onClick={onCloseFile} style={{ color: 'var(--accent-red)' }}>
-              Fermer
+              Close
             </button>
           </>
         )}
 
         <div className="mode-toggle">
-          <button className={`mode-btn ${theme === 'cyberpunk' ? 'active' : ''}`} onClick={() => onChangeTheme('cyberpunk')} title="Thème Cyberpunk (Obsidienne)">
+          <button className={`mode-btn ${theme === 'cyberpunk' ? 'active' : ''}`} onClick={() => onChangeTheme('cyberpunk')} title="Cyberpunk theme (Obsidian)">
             <Zap size={16} />
           </button>
-          <button className={`mode-btn ${theme === 'dracula' ? 'active' : ''}`} onClick={() => onChangeTheme('dracula')} title="Thème Dracula">
+          <button className={`mode-btn ${theme === 'dracula' ? 'active' : ''}`} onClick={() => onChangeTheme('dracula')} title="Dracula theme">
             <Moon size={16} />
           </button>
-          <button className={`mode-btn ${theme === 'dark' ? 'active' : ''}`} onClick={() => onChangeTheme('dark')} title="Thème Dark (sobre)">
+          <button className={`mode-btn ${theme === 'dark' ? 'active' : ''}`} onClick={() => onChangeTheme('dark')} title="Dark theme (minimal)">
             <Eclipse size={16} />
           </button>
-          <button className={`mode-btn ${theme === 'light' ? 'active' : ''}`} onClick={() => onChangeTheme('light')} title="Thème Clair">
+          <button className={`mode-btn ${theme === 'light' ? 'active' : ''}`} onClick={() => onChangeTheme('light')} title="Light theme">
             <Sun size={16} />
           </button>
         </div>

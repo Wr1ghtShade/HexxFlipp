@@ -26,22 +26,22 @@ export const StatusBar: React.FC<StatusBarProps> = ({ state, isFileLoaded, versi
       <div className="statusbar-left">
         {isFileLoaded ? (
           <>
-            <div className="info-chip">Nom: {state.fileName}</div>
+            <div className="info-chip">Name: {state.fileName}</div>
             <div className={`info-chip ${state.fileMode}`}>
               Type: {FILE_MODE_LABEL[state.fileMode]}
             </div>
-            <div className="info-chip">Taille: {state.fileSize} octets</div>
+            <div className="info-chip">Size: {state.fileSize} bytes</div>
             {state.isCompareMode && (
               <div
                 className="info-chip"
                 style={{ background: 'var(--bg-dark-well)', color: 'var(--accent-purple)', borderColor: 'var(--accent-purple)' }}
               >
-                Diff: {state.compareState ? `vs ${state.compareState.fileName}` : 'En attente du fichier B'}
+                Diff: {state.compareState ? `vs ${state.compareState.fileName}` : 'Waiting for file B'}
               </div>
             )}
           </>
         ) : (
-          <span>Prêt pour explorer</span>
+          <span>Ready to explore</span>
         )}
       </div>
       <div>

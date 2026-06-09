@@ -116,7 +116,7 @@ export const IButtonSidebar: React.FC<IButtonSidebarProps> = ({ card, onChangeCa
             onClick={() => setActiveTab('files')}
           >
             <Folder size={14} />
-            Fichiers (1WFS)
+            Files (1WFS)
             {parsedFiles.length > 0 && (
               <span style={{ background: 'var(--accent-cyan)', color: '#060913', padding: '1px 6px', borderRadius: '10px', fontSize: '0.7rem', fontWeight: 'bold' }}>
                 {parsedFiles.length}
@@ -132,21 +132,21 @@ export const IButtonSidebar: React.FC<IButtonSidebarProps> = ({ card, onChangeCa
           <>
             {/* Panel Principal de Configuration */}
             <div className="panel">
-              <h3 className="panel-title">Clé iButton</h3>
+              <h3 className="panel-title">iButton Key</h3>
               
               <div className="form-group">
-                <label className="form-label">Protocole</label>
+                <label className="form-label">Protocol</label>
                 <select 
                   className="form-input" 
                   value={card.protocol}
                   onChange={(e) => handleProtocolChange(e.target.value)}
                   style={{ background: 'var(--bg-dark-well)', color: 'var(--text-primary)' }}
                 >
-                  <option value="DS1990">DS1990 (ROM seule)</option>
+                  <option value="DS1990">DS1990 (ROM only)</option>
                   <option value="DS1992">DS1992 (ROM + 1Kb SRAM)</option>
                   <option value="DS1996">DS1996 (ROM + 8Kb SRAM)</option>
                   <option value="DS1971">DS1971 (ROM + 256b EEPROM)</option>
-                  <option value="DSGeneric">DSGeneric (Générique 1-Wire)</option>
+                  <option value="DSGeneric">DSGeneric (Generic 1-Wire)</option>
                   <option value="Cyfral">Cyfral</option>
                   <option value="Metakom">Metakom</option>
                 </select>
@@ -155,12 +155,12 @@ export const IButtonSidebar: React.FC<IButtonSidebarProps> = ({ card, onChangeCa
               {isDallas && card.romData && (
                 <div className="form-group">
                   <label className="form-label" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    Identifiant ROM (8 octets)
+                    ROM Identifier (8 bytes)
                     <span 
                       style={{ color: 'var(--accent-cyan)', cursor: 'pointer', fontSize: '0.75rem', textTransform: 'none' }}
                       onClick={generateRandomRom}
                     >
-                      Générer aléatoire
+                      Generate random
                     </span>
                   </label>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '4px' }}>
@@ -193,7 +193,7 @@ export const IButtonSidebar: React.FC<IButtonSidebarProps> = ({ card, onChangeCa
                         background: crcMatches ? 'rgba(0, 230, 118, 0.05)' : 'rgba(255, 51, 102, 0.05)'
                       }}
                     >
-                      <strong>Statut CRC :</strong> {crcMatches ? 'Valide ✓' : `Invalide (Calculé: ${crcCalculated.toString(16).toUpperCase().padStart(2, '0')})`}
+                      <strong>CRC Status:</strong> {crcMatches ? 'Valid ✓' : `Invalid (Calculated: ${crcCalculated.toString(16).toUpperCase().padStart(2, '0')})`}
                     </div>
                   )}
                 </div>
@@ -201,7 +201,7 @@ export const IButtonSidebar: React.FC<IButtonSidebarProps> = ({ card, onChangeCa
 
               {!isDallas && card.data && (
                 <div className="form-group">
-                  <label className="form-label">Données de Clé</label>
+                  <label className="form-label">Key Data</label>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '4px' }}>
                     {card.data.map((byte, idx) => (
                       <input
@@ -226,11 +226,11 @@ export const IButtonSidebar: React.FC<IButtonSidebarProps> = ({ card, onChangeCa
             {/* Specifications Dallas */}
             {isDallas && (
               <div className="panel">
-                <h3 className="panel-title">Spécifications Dallas</h3>
+                <h3 className="panel-title">Dallas Specifications</h3>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                  <div>Famille ROM (Octet 0) : <strong style={{ color: 'var(--accent-cyan)' }}>{card.romData ? card.romData[0] : 'N/A'}</strong></div>
-                  <div>Numéro de Série (Octets 1-6) : <strong>{card.romData ? card.romData.slice(1, 7).join(' ') : 'N/A'}</strong></div>
-                  <div>Somme de contrôle (Octet 7) : <strong style={{ color: crcMatches ? 'var(--accent-green)' : 'var(--accent-red)' }}>{card.romData ? card.romData[7] : 'N/A'}</strong></div>
+                  <div>ROM Family (Byte 0): <strong style={{ color: 'var(--accent-cyan)' }}>{card.romData ? card.romData[0] : 'N/A'}</strong></div>
+                  <div>Serial Number (Bytes 1-6): <strong>{card.romData ? card.romData.slice(1, 7).join(' ') : 'N/A'}</strong></div>
+                  <div>Checksum (Byte 7): <strong style={{ color: crcMatches ? 'var(--accent-green)' : 'var(--accent-red)' }}>{card.romData ? card.romData[7] : 'N/A'}</strong></div>
                 </div>
               </div>
             )}
@@ -257,14 +257,14 @@ export const IButtonSidebar: React.FC<IButtonSidebarProps> = ({ card, onChangeCa
                 </h3>
 
                 <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>
-                  Page départ: <strong>{selectedFile.startPage}</strong> | Taille: <strong>{selectedFile.pageCount} page(s)</strong>
+                  Start page: <strong>{selectedFile.startPage}</strong> | Size: <strong>{selectedFile.pageCount} page(s)</strong>
                 </div>
 
                 <div style={{ borderTop: '1px solid var(--border-subtle)', margin: '4px 0' }} />
 
                 {/* Contenu ASCII */}
                 <div style={{ fontSize: '0.75rem' }}>
-                  <span className="form-label" style={{ display: 'block', marginBottom: '4px' }}>Contenu Texte (ASCII)</span>
+                  <span className="form-label" style={{ display: 'block', marginBottom: '4px' }}>Text Content (ASCII)</span>
                   <div style={{ background: 'var(--bg-dark-well)', padding: '0.5rem', borderRadius: '4px', border: '1px solid var(--border-subtle)', fontFamily: 'var(--font-mono)', whiteSpace: 'pre-wrap', maxHeight: '100px', overflowY: 'auto' }}>
                     {selectedFile.contentAscii}
                   </div>
@@ -272,7 +272,7 @@ export const IButtonSidebar: React.FC<IButtonSidebarProps> = ({ card, onChangeCa
 
                 {/* Contenu Hexa */}
                 <div style={{ fontSize: '0.75rem', marginTop: '0.4rem' }}>
-                  <span className="form-label" style={{ display: 'block', marginBottom: '4px' }}>Données Brutes (Hex)</span>
+                  <span className="form-label" style={{ display: 'block', marginBottom: '4px' }}>Raw Data (Hex)</span>
                   <div style={{ background: 'var(--bg-dark-well)', padding: '0.5rem', borderRadius: '4px', border: '1px solid var(--border-subtle)', fontFamily: 'var(--font-mono)', display: 'grid', gridTemplateColumns: 'repeat(8, 1fr)', gap: '4px', maxHeight: '100px', overflowY: 'auto', textAlign: 'center', fontSize: '0.7rem' }}>
                     {selectedFile.contentHex.map((byte, i) => (
                       <span key={`fb-${i}`} style={{ opacity: byte === '00' ? 0.25 : 1 }}>{byte}</span>
@@ -284,11 +284,11 @@ export const IButtonSidebar: React.FC<IButtonSidebarProps> = ({ card, onChangeCa
 
             {/* Liste des fichiers de l'explorateur */}
             <div className="panel">
-              <h3 className="panel-title">Fichiers SRAM Détectés</h3>
+              <h3 className="panel-title">Detected SRAM Files</h3>
               
               {parsedFiles.length === 0 ? (
                 <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.75rem', padding: '2rem 0' }}>
-                  Aucun fichier ou page lisible détecté dans la SRAM.
+                  No readable file or page detected in SRAM.
                 </div>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>

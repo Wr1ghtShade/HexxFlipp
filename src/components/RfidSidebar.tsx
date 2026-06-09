@@ -102,10 +102,10 @@ export const RfidSidebar: React.FC<RfidSidebarProps> = ({ card, onChangeCard }) 
   return (
     <div className="sidebar">
       <div className="panel">
-        <h3 className="panel-title">Badge LF RFID</h3>
+        <h3 className="panel-title">LF RFID Badge</h3>
 
         <div className="form-group">
-          <label className="form-label">Type de Badge (Protocole)</label>
+          <label className="form-label">Badge Type (Protocol)</label>
           <select
             className="form-input"
             value={card.keyType}
@@ -119,7 +119,7 @@ export const RfidSidebar: React.FC<RfidSidebarProps> = ({ card, onChangeCard }) 
         </div>
 
         <div className="form-group">
-          <label className="form-label">Données Hexadécimales</label>
+          <label className="form-label">Hexadecimal Data</label>
           <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
             {card.data.map((byte, idx) => (
               <div key={`rfid-byte-${idx}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '45px' }}>
@@ -142,12 +142,12 @@ export const RfidSidebar: React.FC<RfidSidebarProps> = ({ card, onChangeCard }) 
 
       {isWiegandSupported && decoded && (
         <div className="panel">
-          <h3 className="panel-title">Décodage & Édition Wiegand</h3>
+          <h3 className="panel-title">Wiegand Decoding & Editing</h3>
           <div style={{ fontSize: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.8rem', color: 'var(--text-secondary)' }}>
             
             {/* Formulaire Facility Code */}
             <div className="form-group" style={{ margin: 0 }}>
-              <label className="form-label" style={{ marginBottom: '4px' }}>Code Site (Facility Code - 0 à 255)</label>
+              <label className="form-label" style={{ marginBottom: '4px' }}>Facility Code (0 to 255)</label>
               <input
                 type="number"
                 min="0"
@@ -163,7 +163,7 @@ export const RfidSidebar: React.FC<RfidSidebarProps> = ({ card, onChangeCard }) 
 
             {/* Formulaire Card Number */}
             <div className="form-group" style={{ margin: 0 }}>
-              <label className="form-label" style={{ marginBottom: '4px' }}>Numéro de Carte (0 à 65535)</label>
+              <label className="form-label" style={{ marginBottom: '4px' }}>Card Number (0 to 65535)</label>
               <input
                 type="number"
                 min="0"
@@ -181,7 +181,7 @@ export const RfidSidebar: React.FC<RfidSidebarProps> = ({ card, onChangeCard }) 
             
             {/* Représentation décimale globale */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-              <span>ID Décimal Unique (Entier Complet) :</span>
+              <span>Unique Decimal ID (Full Integer):</span>
               <strong style={{ color: 'var(--accent-purple)', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}>
                 {decoded.fullInteger}
               </strong>

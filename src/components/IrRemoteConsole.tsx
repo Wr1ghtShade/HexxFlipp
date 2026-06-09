@@ -33,7 +33,7 @@ export const IrRemoteConsole: React.FC<IrRemoteConsoleProps> = ({ card, onChange
 
   const handleAddButton = () => {
     const newBtn: IrButton = {
-      name: `Bouton_${card.buttons.length + 1}`,
+      name: `Button_${card.buttons.length + 1}`,
       type: 'parsed',
       protocol: 'NEC',
       address: '00 00 00 00',
@@ -46,7 +46,7 @@ export const IrRemoteConsole: React.FC<IrRemoteConsoleProps> = ({ card, onChange
 
   const handleDeleteButton = () => {
     if (card.buttons.length <= 1) {
-      alert("Il faut conserver au moins un bouton sur la télécommande.");
+      alert("The remote must have at least one button.");
       return;
     }
     const newButtons = card.buttons.filter((_, idx) => idx !== selectedIdx);
@@ -73,7 +73,7 @@ export const IrRemoteConsole: React.FC<IrRemoteConsoleProps> = ({ card, onChange
             }} 
           />
           <span style={{ fontSize: '0.6rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Transmetteur IR
+            IR Transmitter
           </span>
         </div>
 
@@ -119,7 +119,7 @@ export const IrRemoteConsole: React.FC<IrRemoteConsoleProps> = ({ card, onChange
                 </div>
               </div>
             ) : (
-              "Aucun Bouton"
+              "No Button"
             )}
           </div>
 
@@ -151,7 +151,7 @@ export const IrRemoteConsole: React.FC<IrRemoteConsoleProps> = ({ card, onChange
                     setSelectedIdx(idx);
                     handleTransmit();
                   }}
-                  title={`Sélectionner et transmettre ${btn.name}`}
+                  title={`Select and transmit ${btn.name}`}
                 >
                   {btn.name}
                 </button>
@@ -166,7 +166,7 @@ export const IrRemoteConsole: React.FC<IrRemoteConsoleProps> = ({ card, onChange
             onClick={handleAddButton}
           >
             <Plus size={16} />
-            Ajouter Bouton
+            Add Button
           </button>
         </div>
 
@@ -177,12 +177,12 @@ export const IrRemoteConsole: React.FC<IrRemoteConsoleProps> = ({ card, onChange
         {selectedButton ? (
           <div className="panel">
             <h3 className="panel-title" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span>Propriétés Bouton</span>
+              <span>Button Properties</span>
               <button 
                 className="btn btn-icon" 
                 style={{ border: 'none', background: 'transparent', color: 'var(--accent-red)', padding: '2px' }}
                 onClick={handleDeleteButton}
-                title="Supprimer ce bouton"
+                title="Delete this button"
               >
                 <Trash size={16} />
               </button>
@@ -190,7 +190,7 @@ export const IrRemoteConsole: React.FC<IrRemoteConsoleProps> = ({ card, onChange
 
             {/* Nom */}
             <div className="form-group">
-              <label className="form-label">Nom du Bouton</label>
+              <label className="form-label">Button Name</label>
               <input
                 type="text"
                 className="form-input"
@@ -202,7 +202,7 @@ export const IrRemoteConsole: React.FC<IrRemoteConsoleProps> = ({ card, onChange
 
             {/* Type */}
             <div className="form-group">
-              <label className="form-label">Type de Signal</label>
+              <label className="form-label">Signal Type</label>
               <div className="mode-toggle" style={{ width: '100%' }}>
                 <button
                   className={`mode-btn ${selectedButton.type === 'parsed' ? 'active' : ''}`}
@@ -237,7 +237,7 @@ export const IrRemoteConsole: React.FC<IrRemoteConsoleProps> = ({ card, onChange
             {selectedButton.type === 'parsed' ? (
               <>
                 <div className="form-group">
-                  <label className="form-label">Protocole IR</label>
+                  <label className="form-label">IR Protocol</label>
                   <select
                     className="form-input"
                     value={selectedButton.protocol}
@@ -251,7 +251,7 @@ export const IrRemoteConsole: React.FC<IrRemoteConsoleProps> = ({ card, onChange
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Adresse (4 octets hex)</label>
+                  <label className="form-label">Address (4 hex bytes)</label>
                   <input
                     type="text"
                     className="form-input"
@@ -263,7 +263,7 @@ export const IrRemoteConsole: React.FC<IrRemoteConsoleProps> = ({ card, onChange
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Commande (4 octets hex)</label>
+                  <label className="form-label">Command (4 hex bytes)</label>
                   <input
                     type="text"
                     className="form-input"
@@ -277,7 +277,7 @@ export const IrRemoteConsole: React.FC<IrRemoteConsoleProps> = ({ card, onChange
             ) : (
               <>
                 <div className="form-group">
-                  <label className="form-label">Fréquence porteuse (Hz)</label>
+                  <label className="form-label">Carrier Frequency (Hz)</label>
                   <input
                     type="number"
                     className="form-input"
@@ -287,7 +287,7 @@ export const IrRemoteConsole: React.FC<IrRemoteConsoleProps> = ({ card, onChange
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Rapport Cyclique (Duty Cycle)</label>
+                  <label className="form-label">Duty Cycle</label>
                   <input
                     type="number"
                     step="0.01"
@@ -298,7 +298,7 @@ export const IrRemoteConsole: React.FC<IrRemoteConsoleProps> = ({ card, onChange
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Données brutes (Timings en µs)</label>
+                  <label className="form-label">Raw Data (Timings in µs)</label>
                   <textarea
                     className="form-input"
                     value={selectedButton.data}
@@ -318,12 +318,12 @@ export const IrRemoteConsole: React.FC<IrRemoteConsoleProps> = ({ card, onChange
               }}
             >
               <Zap size={16} />
-              Simuler l'émission
+              Simulate transmission
             </button>
           </div>
         ) : (
           <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-            Aucun bouton sélectionné
+            No button selected
           </div>
         )}
       </div>

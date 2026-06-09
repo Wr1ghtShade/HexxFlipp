@@ -43,9 +43,9 @@ export const NfcSidebar: React.FC<NfcSidebarProps> = ({ card, onJumpToBlock, com
       { label: 'Page 13', byte: 1, bit: 2 },
       { label: 'Page 14', byte: 1, bit: 3 },
       { label: 'Page 15', byte: 1, bit: 4 },
-      { label: 'Verrouiller Pages 4-9 en écriture', byte: 1, bit: 5 },
-      { label: 'Verrouiller Pages 10-15 en écriture', byte: 1, bit: 6 },
-      { label: 'Verrouiller les Lock Bytes (R/O)', byte: 1, bit: 7 },
+      { label: 'Lock Pages 4-9 for writing', byte: 1, bit: 5 },
+      { label: 'Lock Pages 10-15 for writing', byte: 1, bit: 6 },
+      { label: 'Lock the Lock Bytes (R/O)', byte: 1, bit: 7 },
     ];
 
     const updateHeaderValue = (key: string, val: string) => {
@@ -109,10 +109,10 @@ export const NfcSidebar: React.FC<NfcSidebarProps> = ({ card, onJumpToBlock, com
         
         {/* Paramètres NTAG */}
         <div className="panel">
-          <h3 className="panel-title" style={{ color: 'var(--accent-orange)' }}>Configuration NTAG</h3>
-          
+          <h3 className="panel-title" style={{ color: 'var(--accent-orange)' }}>NTAG Configuration</h3>
+
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.75rem', marginBottom: '0.8rem', color: 'var(--text-secondary)' }}>
-            <div>Type de composant : <strong style={{ color: 'var(--text-primary)' }}>{card.deviceType}</strong></div>
+            <div>Component type: <strong style={{ color: 'var(--text-primary)' }}>{card.deviceType}</strong></div>
             <div>UID : <strong style={{ fontFamily: 'var(--font-mono)' }}>{card.uid}</strong></div>
             <div>ATQA : <strong>{card.atqa || 'N/A'}</strong> | SAK : <strong>{card.sak || 'N/A'}</strong></div>
           </div>
@@ -120,9 +120,9 @@ export const NfcSidebar: React.FC<NfcSidebarProps> = ({ card, onJumpToBlock, com
 
         {/* Section Lock Bytes */}
         <div className="panel" style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-          <h3 className="panel-title">Verrous de pages (Lock Bits)</h3>
+          <h3 className="panel-title">Page Locks (Lock Bits)</h3>
           <p style={{ fontSize: '0.65rem', color: 'var(--text-secondary)', margin: 0 }}>
-            Les bits de verrouillage configurés sur la Page 2 contrôlent l'accès en écriture des blocs.
+            The lock bits configured on Page 2 control write access to blocks.
           </p>
 
           <div style={{ maxHeight: '200px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '4px', background: 'var(--bg-dark-well)', padding: '0.5rem', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}>
@@ -149,11 +149,11 @@ export const NfcSidebar: React.FC<NfcSidebarProps> = ({ card, onJumpToBlock, com
 
         {/* Sécurité et Authentification */}
         <div className="panel">
-          <h3 className="panel-title">Sécurité & Authentification</h3>
+          <h3 className="panel-title">Security & Authentication</h3>
 
-          {/* Mot de passe */}
+          {/* Password */}
           <div className="form-group">
-            <label className="form-label">Mot de Passe (PWD - 4 octets hex)</label>
+            <label className="form-label">Password (PWD - 4 hex bytes)</label>
             <input
               type="text"
               className="form-input"
@@ -166,7 +166,7 @@ export const NfcSidebar: React.FC<NfcSidebarProps> = ({ card, onJumpToBlock, com
 
           {/* PACK */}
           <div className="form-group">
-            <label className="form-label">Signature / Acknowledge (PACK - 2 octets hex)</label>
+            <label className="form-label">Signature / Acknowledge (PACK - 2 hex bytes)</label>
             <input
               type="text"
               className="form-input"
@@ -179,7 +179,7 @@ export const NfcSidebar: React.FC<NfcSidebarProps> = ({ card, onJumpToBlock, com
 
           {/* Signature ECC */}
           <div className="form-group">
-            <label className="form-label">Signature d'authenticité ECC (32 octets hex)</label>
+            <label className="form-label">ECC Authenticity Signature (32 hex bytes)</label>
             <textarea
               className="form-input"
               value={signature}
@@ -253,9 +253,9 @@ export const NfcSidebar: React.FC<NfcSidebarProps> = ({ card, onJumpToBlock, com
       {/* 2. Carte graphique des secteurs */}
       <div className="panel">
         <h3 className="panel-title">
-          Carte des Secteurs
+          Sector Map
           <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-            ({totalSectors} Secteurs)
+            ({totalSectors} Sectors)
           </span>
         </h3>
         
@@ -277,20 +277,20 @@ export const NfcSidebar: React.FC<NfcSidebarProps> = ({ card, onJumpToBlock, com
                 key={`sector-${i}`}
                 className={cardClass}
                 onClick={() => setSelectedSector(i)}
-                title={`Secteur ${i} : Blocs ${sectorStart} à ${sectorEnd}`}
+                title={`Sector ${i}: Blocks ${sectorStart} to ${sectorEnd}`}
               >
                 <span className="sector-num">{i}</span>
-                <span className="sector-label">Secteur</span>
+                <span className="sector-label">Sector</span>
                 
                 {/* Pastille de statut */}
                 {hasInvalidBits ? (
-                  <div className="sector-status-dot invalid" title="Bits d'accès corrompus !" />
+                  <div className="sector-status-dot invalid" title="Corrupted access bits!" />
                 ) : hasDiff ? (
-                  <div className="sector-status-dot diff" style={{ backgroundColor: 'var(--accent-red)' }} title="Secteur avec différences" />
+                  <div className="sector-status-dot diff" style={{ backgroundColor: 'var(--accent-red)' }} title="Sector with differences" />
                 ) : hasUnknown ? (
-                  <div className="sector-status-dot unknown" style={{ backgroundColor: 'var(--accent-orange)' }} title="Données inconnues (??)" />
+                  <div className="sector-status-dot unknown" style={{ backgroundColor: 'var(--accent-orange)' }} title="Unknown data (??)" />
                 ) : (
-                  <div className="sector-status-dot" title="Secteur complet et valide" />
+                  <div className="sector-status-dot" title="Complete and valid sector" />
                 )}
               </div>
             );
@@ -301,73 +301,73 @@ export const NfcSidebar: React.FC<NfcSidebarProps> = ({ card, onJumpToBlock, com
       {/* 3. Analyse détaillée du secteur sélectionné */}
       <div className="panel">
         <h3 className="panel-title">
-          Détails Secteur {selectedSector}
+          Sector {selectedSector} Details
           <span 
             style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)', cursor: 'pointer' }}
             onClick={() => onJumpToBlock(decodedSector.startBlock)}
           >
-            Aller au bloc
+            Go to block
           </span>
         </h3>
 
         <div className="sector-detail">
           <div className="detail-row">
-            <span className="detail-label">Blocs</span>
-            <span className="detail-value">{decodedSector.startBlock} à {decodedSector.endBlock}</span>
+            <span className="detail-label">Blocks</span>
+            <span className="detail-value">{decodedSector.startBlock} to {decodedSector.endBlock}</span>
           </div>
 
           <div className="detail-row">
-            <span className="detail-label">Clé A (Key A)</span>
+            <span className="detail-label">Key A</span>
             <span className="detail-value" style={{ color: 'var(--accent-cyan)' }}>{decodedSector.keyA}</span>
           </div>
 
           <div className="detail-row">
-            <span className="detail-label">Clé B (Key B)</span>
+            <span className="detail-label">Key B</span>
             <span className="detail-value" style={{ color: 'var(--accent-green)' }}>{decodedSector.keyB}</span>
           </div>
 
           <div className="detail-row">
-            <span className="detail-label">Bits d'Accès</span>
+            <span className="detail-label">Access Bits</span>
             <span className="detail-value" style={{ color: 'var(--accent-orange)' }}>
               {decodedSector.accessBytes.join(' ')}
             </span>
           </div>
 
           <div className="detail-row">
-            <span className="detail-label">Octet Utilisateur</span>
+            <span className="detail-label">User Byte</span>
             <span className="detail-value">{decodedSector.userByte}</span>
           </div>
 
           {/* Alerte si les bits d'accès sont invalides */}
           {!decodedSector.isValid && decodedSector.accessBytes.every(b => b !== '??') && (
             <div className="alert alert-danger" style={{ marginTop: '0.5rem' }}>
-              <strong>Attention :</strong> Les bits inversés ne correspondent pas aux bits normaux. Le secteur sera verrouillé/inaccessible sur un vrai badge !
+              <strong>Warning:</strong> Inverted bits do not match normal bits. The sector will be locked/inaccessible on a real badge!
             </div>
           )}
 
           {decodedSector.accessBytes.some(b => b === '??') && (
             <div className="alert alert-warning" style={{ marginTop: '0.5rem' }}>
-              <strong>Note :</strong> Clés et bits d'accès inconnus. Impossible de décoder les permissions de ce secteur.
+              <strong>Note:</strong> Keys and access bits unknown. Cannot decode permissions for this sector.
             </div>
           )}
 
           {/* Grille des permissions décodées */}
           {decodedSector.isValid && decodedSector.permissions.length > 0 && (
             <div style={{ marginTop: '0.5rem' }}>
-              <span className="form-label" style={{ display: 'block', marginBottom: '0.5rem' }}>Permissions Décodées</span>
+              <span className="form-label" style={{ display: 'block', marginBottom: '0.5rem' }}>Decoded Permissions</span>
               <div className="permission-list">
                 {decodedSector.permissions.map((perm) => (
                   <div key={`perm-${perm.blockIndex}`} className="permission-item">
                     <div className={`permission-header ${perm.blockType === 'trailer' ? 'trailer' : ''}`}>
-                      <span>Bloc {perm.blockIndex} ({perm.blockType === 'trailer' ? 'Remorque' : 'Données'})</span>
+                      <span>Block {perm.blockIndex} ({perm.blockType === 'trailer' ? 'Trailer' : 'Data'})</span>
                     </div>
                     <div className="permission-grid">
-                      <div>Lecture : <strong>{perm.read}</strong></div>
-                      <div>Écriture : <strong>{perm.write}</strong></div>
+                      <div>Read: <strong>{perm.read}</strong></div>
+                      <div>Write: <strong>{perm.write}</strong></div>
                       {perm.blockType === 'data' && (
                         <>
-                          <div>Incrément : <strong>{perm.increment}</strong></div>
-                          <div>Décrément : <strong>{perm.decrement}</strong></div>
+                          <div>Increment: <strong>{perm.increment}</strong></div>
+                          <div>Decrement: <strong>{perm.decrement}</strong></div>
                         </>
                       )}
                     </div>

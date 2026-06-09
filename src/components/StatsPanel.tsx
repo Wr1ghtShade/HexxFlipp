@@ -27,12 +27,12 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ state, onChangeCard }) =
   
   // Qualifier l'entropie
   const getEntropyDescription = (val: number) => {
-    if (binaryData.length === 0) return 'Aucune donnée';
-    if (val < 1.0) return 'Très structuré / Répétitif (vide)';
-    if (val < 4.0) return 'Structure simple / Textes';
-    if (val < 6.8) return 'Code exécutable / Données structurées';
-    if (val < 7.8) return 'Données compressées';
-    return 'Chiffré / Aléatoire / Très haute entropie';
+    if (binaryData.length === 0) return 'No data';
+    if (val < 1.0) return 'Highly structured / Repetitive (empty)';
+    if (val < 4.0) return 'Simple structure / Text';
+    if (val < 6.8) return 'Executable code / Structured data';
+    if (val < 7.8) return 'Compressed data';
+    return 'Encrypted / Random / Very high entropy';
   };
 
   // 2. Calcul des fréquences d'octets
@@ -213,10 +213,10 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ state, onChangeCard }) =
       {/* Informations du Tag NFC (mis tout à droite, au-dessus de l'inspecteur) */}
       {fileMode === 'nfc' && card && !isCompareMode && (
         <div className="panel">
-          <h3 className="panel-title">Informations du Tag NFC</h3>
-          
+          <h3 className="panel-title">NFC Tag Information</h3>
+
           <div className="form-group">
-            <label className="form-label">Type d'appareil</label>
+            <label className="form-label">Device Type</label>
             <input
               type="text"
               className="form-input"
@@ -227,7 +227,7 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ state, onChangeCard }) =
 
           <div className="form-group">
             <label className="form-label">
-              UID (Identifiant Unique)
+              UID (Unique Identifier)
               {uidDiff && compareCard && <span style={{ color: 'var(--accent-red)', marginLeft: '6px', fontSize: '0.75rem' }}>(B: {compareCard.uid})</span>}
             </label>
             <input
@@ -286,7 +286,7 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ state, onChangeCard }) =
 
           {card.deviceType !== 'NTAG/Ultralight' && card.deviceType !== 'Mifare DESFire' && (
             <div className="form-group">
-              <label className="form-label">Type Mifare Classic</label>
+              <label className="form-label">Mifare Classic Type</label>
               <input
                 type="text"
                 className="form-input"
@@ -301,18 +301,18 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ state, onChangeCard }) =
       {/* 1. Inspecteur d'octets */}
       {!isCompareMode && (
         <div className="panel">
-          <h3 className="panel-title">Inspecteur de données</h3>
-          
+          <h3 className="panel-title">Data Inspector</h3>
+
           {inspector === null ? (
             <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.85rem', padding: '1rem 0' }}>
-              Sélectionnez un octet dans l'éditeur pour l'inspecter.
+              Select a byte in the editor to inspect it.
             </div>
           ) : (
             <div className="sector-detail" style={{ gap: '0.6rem' }}>
               <div className="detail-row">
                 <span className="detail-label" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                  Index du curseur
-                  <span className="info-tooltip-icon" title="Position de l'octet sélectionné dans le fichier (en décimal et en hexadécimal)">i</span>
+                  Cursor Index
+                  <span className="info-tooltip-icon" title="Position of the selected byte in the file (decimal and hexadecimal)">i</span>
                 </span>
                 <span className="detail-value" style={{ color: 'var(--accent-purple)' }}>
                   {inspector.index} ({inspector.hexIndex})
@@ -321,8 +321,8 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ state, onChangeCard }) =
 
               <div className="detail-row">
                 <span className="detail-label" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                  Binaire (8-bit)
-                  <span className="info-tooltip-icon" title="Représentation binaire sous forme de 8 bits (0 et 1) de l'octet">i</span>
+                  Binary (8-bit)
+                  <span className="info-tooltip-icon" title="Binary representation of the byte as 8 bits (0s and 1s)">i</span>
                 </span>
                 <span className="detail-value">{inspector.binary ?? 'N/A'}</span>
               </div>
@@ -330,7 +330,7 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ state, onChangeCard }) =
               <div className="detail-row">
                 <span className="detail-label" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                   ASCII
-                  <span className="info-tooltip-icon" title="Caractère textuel correspondant à la valeur de l'octet (table de caractères ASCII)">i</span>
+                  <span className="info-tooltip-icon" title="Text character corresponding to the byte value (ASCII character table)">i</span>
                 </span>
                 <span className="detail-value">{inspector.ascii ?? 'N/A'}</span>
               </div>
@@ -339,16 +339,16 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ state, onChangeCard }) =
 
               <div className="detail-row">
                 <span className="detail-label" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                  Entier 8-bit signé
-                  <span className="info-tooltip-icon" title="Valeur de l'octet interprétée comme un entier signé allant de -128 à 127">i</span>
+                  Signed 8-bit Integer
+                  <span className="info-tooltip-icon" title="Byte value interpreted as a signed integer ranging from -128 to 127">i</span>
                 </span>
                 <span className="detail-value">{inspector.i8 !== null ? inspector.i8 : 'N/A'}</span>
               </div>
               
               <div className="detail-row">
                 <span className="detail-label" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                  Entier 8-bit non-signé
-                  <span className="info-tooltip-icon" title="Valeur de l'octet interprétée comme un entier non-signé allant de 0 à 255">i</span>
+                  Unsigned 8-bit Integer
+                  <span className="info-tooltip-icon" title="Byte value interpreted as an unsigned integer ranging from 0 to 255">i</span>
                 </span>
                 <span className="detail-value">{inspector.ui8 !== null ? inspector.ui8 : 'N/A'}</span>
               </div>
@@ -357,16 +357,16 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ state, onChangeCard }) =
 
               <div className="detail-row">
                 <span className="detail-label" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                  Entier 16-bit (Little Endian)
-                  <span className="info-tooltip-icon" title="Entier codé sur 2 octets (16 bits) avec l'octet de poids faible en premier (Intel/ARM)">i</span>
+                  16-bit Integer (Little Endian)
+                  <span className="info-tooltip-icon" title="Integer encoded on 2 bytes (16 bits) with least significant byte first (Intel/ARM)">i</span>
                 </span>
                 <span className="detail-value">{inspector.i16le !== null ? inspector.i16le : 'N/A'}</span>
               </div>
 
               <div className="detail-row">
                 <span className="detail-label" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                  Entier 16-bit (Big Endian)
-                  <span className="info-tooltip-icon" title="Entier codé sur 2 octets (16 bits) avec l'octet de poids fort en premier (Réseau/Motorola)">i</span>
+                  16-bit Integer (Big Endian)
+                  <span className="info-tooltip-icon" title="Integer encoded on 2 bytes (16 bits) with most significant byte first (Network/Motorola)">i</span>
                 </span>
                 <span className="detail-value">{inspector.i16be !== null ? inspector.i16be : 'N/A'}</span>
               </div>
@@ -375,16 +375,16 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ state, onChangeCard }) =
 
               <div className="detail-row">
                 <span className="detail-label" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                  Entier 32-bit (Little Endian)
-                  <span className="info-tooltip-icon" title="Entier codé sur 4 octets (32 bits) avec l'octet de poids faible en premier">i</span>
+                  32-bit Integer (Little Endian)
+                  <span className="info-tooltip-icon" title="Integer encoded on 4 bytes (32 bits) with least significant byte first">i</span>
                 </span>
                 <span className="detail-value">{inspector.i32le !== null ? inspector.i32le : 'N/A'}</span>
               </div>
 
               <div className="detail-row">
                 <span className="detail-label" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                  Entier 32-bit (Big Endian)
-                  <span className="info-tooltip-icon" title="Entier codé sur 4 octets (32 bits) avec l'octet de poids fort en premier">i</span>
+                  32-bit Integer (Big Endian)
+                  <span className="info-tooltip-icon" title="Integer encoded on 4 bytes (32 bits) with most significant byte first">i</span>
                 </span>
                 <span className="detail-value">{inspector.i32be !== null ? inspector.i32be : 'N/A'}</span>
               </div>
@@ -392,7 +392,7 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ state, onChangeCard }) =
               <div className="detail-row">
                 <span className="detail-label" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                   Float 32 (Little Endian)
-                  <span className="info-tooltip-icon" title="Nombre décimal à virgule flottante standard (IEEE 754) codé sur 4 octets en Little Endian">i</span>
+                  <span className="info-tooltip-icon" title="Standard floating-point number (IEEE 754) encoded on 4 bytes in Little Endian">i</span>
                 </span>
                 <span className="detail-value">
                   {inspector.float32le !== null ? inspector.float32le.toFixed(6).replace(/\.?0+$/, '') : 'N/A'}
@@ -402,7 +402,7 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ state, onChangeCard }) =
               <div className="detail-row">
                 <span className="detail-label" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                   Float 32 (Big Endian)
-                  <span className="info-tooltip-icon" title="Nombre décimal à virgule flottante standard (IEEE 754) codé sur 4 octets en Big Endian">i</span>
+                  <span className="info-tooltip-icon" title="Standard floating-point number (IEEE 754) encoded on 4 bytes in Big Endian">i</span>
                 </span>
                 <span className="detail-value">
                   {inspector.float32be !== null ? inspector.float32be.toFixed(6).replace(/\.?0+$/, '') : 'N/A'}
@@ -415,11 +415,11 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ state, onChangeCard }) =
 
       {/* 2. Entropie globale du fichier */}
       <div className="panel">
-        <h3 className="panel-title">Entropie (Shannon)</h3>
-        
+        <h3 className="panel-title">Shannon Entropy</h3>
+
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
-            <span style={{ color: 'var(--text-secondary)' }}>Valeur d'entropie :</span>
+            <span style={{ color: 'var(--text-secondary)' }}>Entropy value:</span>
             <strong style={{ color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>
               {entropy.toFixed(4)} / 8.0000
             </strong>
@@ -440,11 +440,11 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ state, onChangeCard }) =
 
       {/* 3. Graphique de distribution des fréquences d'octets */}
       <div className="panel">
-        <h3 className="panel-title">Distribution des Octets</h3>
-        
+        <h3 className="panel-title">Byte Distribution</h3>
+
         {binaryData.length === 0 ? (
           <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.85rem', padding: '1rem 0' }}>
-            Aucun octet à analyser.
+            No bytes to analyse.
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
@@ -470,7 +470,7 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ state, onChangeCard }) =
                       height={barHeight}
                       fill="url(#chartGrad)"
                     >
-                      <title>{`Octet 0x${idx.toString(16).toUpperCase().padStart(2, '0')} : ${freq} occurrences`}</title>
+                      <title>{`Byte 0x${idx.toString(16).toUpperCase().padStart(2, '0')}: ${freq} occurrences`}</title>
                     </rect>
                   );
                 })}
@@ -479,7 +479,7 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ state, onChangeCard }) =
             
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: 'var(--text-muted)' }}>
               <span>0x00 (0)</span>
-              <span>Distribution (0x00 - 0xFF)</span>
+              <span>Distribution (0x00–0xFF)</span>
               <span>0xFF (255)</span>
             </div>
           </div>

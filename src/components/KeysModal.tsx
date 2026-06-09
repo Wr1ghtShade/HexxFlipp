@@ -26,7 +26,7 @@ export const KeysModal: React.FC<KeysModalProps> = ({ card, onClose }) => {
 
   const copyAll = () => {
     const out = decoded
-      .map(d => `Secteur ${d.sectorIndex.toString().padStart(2, '0')} | A: ${d.keyA.replace(/\s/g, '')} | B: ${d.keyB.replace(/\s/g, '')}`)
+      .map(d => `Sector ${d.sectorIndex.toString().padStart(2, '0')} | A: ${d.keyA.replace(/\s/g, '')} | B: ${d.keyB.replace(/\s/g, '')}`)
       .join('\n');
     void navigator.clipboard.writeText(out);
   };
@@ -62,13 +62,13 @@ export const KeysModal: React.FC<KeysModalProps> = ({ card, onClose }) => {
         >
           <h2 style={{ fontSize: '1.05rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-cyan)' }}>
             <Key size={18} />
-            Clés A et B du tag NFC
+            A and B Keys of NFC Tag
           </h2>
           <button
             className="btn btn-icon"
             onClick={onClose}
             style={{ border: 'none', background: 'transparent', padding: '4px', cursor: 'pointer', color: 'var(--text-secondary)' }}
-            aria-label="Fermer"
+            aria-label="Close"
           >
             <X size={16} />
           </button>
@@ -78,15 +78,15 @@ export const KeysModal: React.FC<KeysModalProps> = ({ card, onClose }) => {
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.75rem' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)', textAlign: 'left' }}>
-                <th style={{ padding: '0.3rem 0.4rem', fontWeight: 600 }}>Secteur</th>
-                <th style={{ padding: '0.3rem 0.4rem', fontWeight: 600 }}>Clé A (Key A)</th>
-                <th style={{ padding: '0.3rem 0.4rem', fontWeight: 600 }}>Clé B (Key B)</th>
+                <th style={{ padding: '0.3rem 0.4rem', fontWeight: 600 }}>Sector</th>
+                <th style={{ padding: '0.3rem 0.4rem', fontWeight: 600 }}>Key A</th>
+                <th style={{ padding: '0.3rem 0.4rem', fontWeight: 600 }}>Key B</th>
               </tr>
             </thead>
             <tbody>
               {decoded.map(d => (
                 <tr key={`sector-key-${d.sectorIndex}`} style={{ borderBottom: '1px solid var(--border-subtle)', verticalAlign: 'middle' }}>
-                  <td style={{ padding: '0.25rem 0.4rem', fontWeight: 'bold' }}>Secteur {d.sectorIndex}</td>
+                  <td style={{ padding: '0.25rem 0.4rem', fontWeight: 'bold' }}>Sector {d.sectorIndex}</td>
                   <td style={{ padding: '0.25rem 0.4rem', fontFamily: 'var(--font-mono)', color: d.keyA.includes('??') ? 'var(--text-muted)' : 'var(--accent-cyan)' }}>
                     {d.keyA}
                   </td>
@@ -100,14 +100,14 @@ export const KeysModal: React.FC<KeysModalProps> = ({ card, onClose }) => {
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.6rem', borderTop: '1px solid var(--border-color)', paddingTop: '0.8rem', marginTop: '0.4rem' }}>
-          <button className="btn" onClick={copyAll} title="Copier toutes les clés par secteur">
-            Copier tout
+          <button className="btn" onClick={copyAll} title="Copy all keys by sector">
+            Copy all
           </button>
-          <button className="btn" onClick={copyUnique} title="Copier uniquement la liste des clés uniques sans doublons (pour fichier dictionnaire)">
-            Copier clés uniques
+          <button className="btn" onClick={copyUnique} title="Copy only the list of unique keys without duplicates (for dictionary file)">
+            Copy unique keys
           </button>
           <button className="btn btn-primary" onClick={onClose}>
-            Fermer
+            Close
           </button>
         </div>
       </div>

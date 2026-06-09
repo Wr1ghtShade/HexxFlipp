@@ -567,7 +567,7 @@ export const HexGrid: React.FC<HexGridProps> = ({
                 </p>
               </>
             ) : (
-              "Aucune donnée à afficher."
+              "No data to display."
             )}
           </div>
         ) : (

@@ -58,7 +58,7 @@ export function fromRaw(state: HexEditorState): HexEditorState {
   try {
     text = new TextDecoder('utf-8', { fatal: false }).decode(state.rawBytes);
   } catch {
-    throw new ModeConversionError('Erreur de décodage textuel pour le format Flipper.');
+    throw new ModeConversionError('Text decoding error for Flipper format.');
   }
 
   const detected: FileMode | null = detectByContent(text);

@@ -16,12 +16,12 @@ interface FormatHint {
 }
 
 const FORMATS: FormatHint[] = [
-  { color: 'var(--accent-cyan)',   label: '📡 Flipper NFC (.nfc)',         desc: "Analyse des secteurs, clés A/B, bits d'accès (Mifare Classic, Ultralight, DESFire)." },
-  { color: 'var(--accent-orange)', label: '🔑 Clés iButton (.ibtn)',       desc: 'Dallas ROM/SRAM/EEPROM, protocoles Cyfral & Metakom, calcul de CRC8.' },
-  { color: 'var(--accent-purple)', label: '🆔 LF RFID (.rfid)',            desc: 'Badges basse fréquence (EM4100, H10301, etc.) et décodage Wiegand 26.' },
-  { color: 'var(--accent-red)',    label: '📟 Infrarouge (.ir)',           desc: 'Télécommande virtuelle interactive, édition de signaux Parsed et Raw.' },
-  { color: 'var(--accent-cyan)',   label: '💻 Scripts BadUSB (.txt)',      desc: 'Éditeur Duckyscript avec numérotation de lignes, cheat sheet et validateur.' },
-  { color: 'var(--accent-green)',  label: '📁 Binaires bruts (.bin)',       desc: 'Édition hexadécimale classique (.bin, .dat) avec pagination de grille.' }
+  { color: 'var(--accent-cyan)',   label: '📡 Flipper NFC (.nfc)',         desc: "Sector analysis, A/B keys, access bits (Mifare Classic, Ultralight, DESFire)." },
+  { color: 'var(--accent-orange)', label: '🔑 iButton Keys (.ibtn)',       desc: 'Dallas ROM/SRAM/EEPROM, Cyfral & Metakom protocols, CRC8 calculation.' },
+  { color: 'var(--accent-purple)', label: '🆔 LF RFID (.rfid)',            desc: 'Low-frequency badges (EM4100, H10301, etc.) and Wiegand 26 decoding.' },
+  { color: 'var(--accent-red)',    label: '📟 Infrared (.ir)',             desc: 'Interactive virtual remote, Parsed and Raw signal editing.' },
+  { color: 'var(--accent-cyan)',   label: '💻 BadUSB Scripts (.txt)',      desc: 'Duckyscript editor with line numbering, cheat sheet and validator.' },
+  { color: 'var(--accent-green)',  label: '📁 Raw Binaries (.bin)',        desc: 'Classic hex editing (.bin, .dat) with grid pagination.' }
 ];
 
 export const DropZone: React.FC<DropZoneProps> = ({ onFileSelected }) => {
@@ -47,9 +47,9 @@ export const DropZone: React.FC<DropZoneProps> = ({ onFileSelected }) => {
         <div className="dropzone-icon" style={{ marginBottom: '0.5rem' }}>
           <UploadCloud size={40} />
         </div>
-        <h2 style={{ fontSize: '1.4rem', fontWeight: 'bold', marginBottom: '0.4rem' }}>Faites glisser un fichier ici</h2>
+        <h2 style={{ fontSize: '1.4rem', fontWeight: 'bold', marginBottom: '0.4rem' }}>Drop a file here</h2>
         <p style={{ color: 'var(--text-secondary)', maxWidth: '500px', fontSize: '0.85rem', marginBottom: '1.2rem', lineHeight: '1.4' }}>
-          Glissez-déposez vos dumps NFC Flipper ou vos fichiers binaires bruts pour démarrer l'exploration.
+          Drag and drop your Flipper Zero dumps or raw binary files to start exploring.
         </p>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.8rem', width: '100%', textAlign: 'left', margin: '0 auto 1.5rem auto', fontSize: '0.75rem' }}>
@@ -66,7 +66,7 @@ export const DropZone: React.FC<DropZoneProps> = ({ onFileSelected }) => {
             className="btn btn-primary"
             onClick={(e) => { e.stopPropagation(); document.getElementById('file-input')?.click(); }}
           >
-            Parcourir...
+            Browse...
           </button>
         </div>
       </div>

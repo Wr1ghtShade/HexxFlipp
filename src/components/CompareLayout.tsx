@@ -29,13 +29,13 @@ const SubGhzSummary: React.FC<SubGhzSummaryProps> = ({ card, color, title }) => 
   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.8rem', background: 'var(--bg-dark-well)', padding: '1rem', overflowY: 'auto', border: '1px solid var(--border-color)', borderRadius: '6px' }}>
     <div style={{ fontWeight: 'bold', fontSize: '0.85rem', color }}>{title} :</div>
     <div style={{ fontSize: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.4rem', color: 'var(--text-secondary)' }}>
-      <div>Fréquence: <strong>{(card.frequency ? card.frequency / 1000000 : 433.92).toFixed(2)} MHz</strong></div>
+      <div>Frequency: <strong>{(card.frequency ? card.frequency / 1000000 : 433.92).toFixed(2)} MHz</strong></div>
       <div>Modulation / Preset: <strong>{card.preset?.replace('FuriHalSubGhzPreset', '') || 'OOK'}</strong></div>
-      <div>Protocole: <strong>{card.protocol || 'RAW'}</strong></div>
+      <div>Protocol: <strong>{card.protocol || 'RAW'}</strong></div>
       {card.bit !== undefined && <div>Bits: <strong>{card.bit}</strong></div>}
-      {card.key && <div>Clé (Key hex): <strong style={{ fontFamily: 'var(--font-mono)' }}>{card.key}</strong></div>}
+      {card.key && <div>Key (hex): <strong style={{ fontFamily: 'var(--font-mono)' }}>{card.key}</strong></div>}
       {card.rawTimes && (
-        <div>Impulsions RAW: <strong>{card.rawTimes.length} ({Math.round(card.rawTimes.reduce((a, b) => a + Math.abs(b), 0) / 1000)} ms)</strong></div>
+        <div>RAW pulses: <strong>{card.rawTimes.length} ({Math.round(card.rawTimes.reduce((a, b) => a + Math.abs(b), 0) / 1000)} ms)</strong></div>
       )}
     </div>
   </div>
@@ -100,10 +100,10 @@ export const CompareLayout: React.FC<CompareLayoutProps> = ({
       );
     }
     if (state.fileMode === 'ir' && state.irCard) {
-      return <IrSummary card={state.irCard} color="var(--accent-orange)" title="Signaux IR A" />;
+      return <IrSummary card={state.irCard} color="var(--accent-orange)" title="IR Signals A" />;
     }
     if (state.fileMode === 'sub' && state.subGhzCard) {
-      return <SubGhzSummary card={state.subGhzCard} color="var(--accent-green)" title="Paramètres Sub-Ghz A" />;
+      return <SubGhzSummary card={state.subGhzCard} color="var(--accent-green)" title="Sub-GHz Settings A" />;
     }
     return (
       <HexGrid
@@ -130,10 +130,10 @@ export const CompareLayout: React.FC<CompareLayoutProps> = ({
       );
     }
     if (state.fileMode === 'ir' && cs.irCard) {
-      return <IrSummary card={cs.irCard} color="var(--accent-orange)" title="Signaux IR B" />;
+      return <IrSummary card={cs.irCard} color="var(--accent-orange)" title="IR Signals B" />;
     }
     if (state.fileMode === 'sub' && cs.subGhzCard) {
-      return <SubGhzSummary card={cs.subGhzCard} color="var(--accent-purple)" title="Paramètres Sub-Ghz B" />;
+      return <SubGhzSummary card={cs.subGhzCard} color="var(--accent-purple)" title="Sub-GHz Settings B" />;
     }
     if (!compareGridState) return null;
     return (
@@ -155,7 +155,7 @@ export const CompareLayout: React.FC<CompareLayoutProps> = ({
       {/* Colonne A : fichier actif */}
       <div className="compare-pane">
         <div className="compare-pane-header">
-          <span>Fichier A : <strong style={{ color: 'var(--accent-cyan)' }}>{state.fileName}</strong> ({state.fileSize} octets)</span>
+          <span>File A: <strong style={{ color: 'var(--accent-cyan)' }}>{state.fileName}</strong> ({state.fileSize} bytes)</span>
         </div>
         {renderPaneA()}
       </div>
@@ -165,12 +165,12 @@ export const CompareLayout: React.FC<CompareLayoutProps> = ({
         {state.compareState ? (
           <>
             <div className="compare-pane-header">
-              <span>Fichier B : <strong style={{ color: 'var(--accent-purple)' }}>{state.compareState.fileName}</strong> ({state.compareState.fileSize} octets)</span>
+              <span>File B: <strong style={{ color: 'var(--accent-purple)' }}>{state.compareState.fileName}</strong> ({state.compareState.fileSize} bytes)</span>
               <button
                 className="btn btn-icon"
                 style={{ border: 'none', background: 'transparent', color: 'var(--accent-red)', padding: '2px' }}
                 onClick={onUnloadCompare}
-                title="Décharger le fichier B"
+                title="Unload file B"
               >
                 <X size={16} />
               </button>
@@ -186,9 +186,9 @@ export const CompareLayout: React.FC<CompareLayoutProps> = ({
             onClick={() => document.getElementById('compare-file-input')?.click()}
           >
             <UploadCloud size={32} style={{ color: 'var(--text-muted)', marginBottom: '0.8rem' }} />
-            <p style={{ fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.3rem' }}>Charger le Fichier B</p>
+            <p style={{ fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.3rem' }}>Load File B</p>
             <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textAlign: 'center', maxWidth: '300px' }}>
-              Glissez-déposez le fichier de comparaison ici, ou cliquez pour parcourir.
+              Drag and drop the comparison file here, or click to browse.
             </p>
             <input
               type="file"

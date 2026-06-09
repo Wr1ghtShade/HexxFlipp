@@ -108,9 +108,9 @@ export default function App() {
       history.reset(next);
     } catch (err) {
       if (err instanceof FileTooLargeError) {
-        alert(`Fichier trop volumineux (${formatBytes(file.size)}). Taille max : ${formatBytes(MAX_FILE_SIZE)}.`);
+        alert(`File too large (${formatBytes(file.size)}). Max size: ${formatBytes(MAX_FILE_SIZE)}.`);
       } else {
-        alert(err instanceof Error ? err.message : 'Erreur de lecture du fichier');
+        alert(err instanceof Error ? err.message : 'Error reading file');
       }
     }
   }, [history]);
@@ -123,9 +123,9 @@ export default function App() {
       applyState(next);
     } catch (err) {
       if (err instanceof FileTooLargeError) {
-        alert(`Fichier trop volumineux (${formatBytes(file.size)}). Taille max : ${formatBytes(MAX_FILE_SIZE)}.`);
+        alert(`File too large (${formatBytes(file.size)}). Max size: ${formatBytes(MAX_FILE_SIZE)}.`);
       } else {
-        alert(err instanceof Error ? err.message : 'Erreur de lecture du fichier de comparaison');
+        alert(err instanceof Error ? err.message : 'Error reading comparison file');
       }
     }
   }, [applyState]);
@@ -213,7 +213,7 @@ export default function App() {
 
   const handleSave = useCallback(() => {
     const { name } = defaultSaveName(stateRef.current);
-    openSaveDialog("Enregistrer le fichier", name, undefined, (finalName) => {
+    openSaveDialog("Save file", name, undefined, (finalName) => {
       const blob = buildSaveBlob(stateRef.current);
       if (!blob) { closeSaveDialog(); return; }
       triggerDownload(blob, finalName);
@@ -225,7 +225,7 @@ export default function App() {
   const handleExportToBinary = useCallback(() => {
     const built = buildExportToBinaryBlob(stateRef.current);
     if (!built) return;
-    openSaveDialog("Exporter en .bin", built.defaultName, '.bin', (finalName) => {
+    openSaveDialog("Export as .bin", built.defaultName, '.bin', (finalName) => {
       triggerDownload(built.blob, finalName);
       closeSaveDialog();
     });
@@ -234,7 +234,7 @@ export default function App() {
   const handleExportToNfc = useCallback(() => {
     const built = buildExportToNfcBlob(stateRef.current);
     if (!built) return;
-    openSaveDialog("Exporter en .nfc Flipper", built.defaultName, '.nfc', (finalName) => {
+    openSaveDialog("Export as .nfc Flipper", built.defaultName, '.nfc', (finalName) => {
       triggerDownload(built.blob, finalName);
       closeSaveDialog();
     });
@@ -255,7 +255,7 @@ export default function App() {
       }
     } catch (err) {
       if (err instanceof ModeConversionError) alert(err.message);
-      else alert("Erreur lors du changement de mode.");
+      else alert("Error switching mode.");
     }
   }, [applyState]);
 

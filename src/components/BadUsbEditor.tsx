@@ -49,7 +49,7 @@ export const BadUsbEditor: React.FC<BadUsbEditorProps> = ({ text, onChangeText }
         results.push({
           lineNum: idx + 1,
           type: 'error',
-          message: `Commande '${firstWord}' inconnue.`
+          message: `Unknown command '${firstWord}'.`
         });
         return;
       }
@@ -62,7 +62,7 @@ export const BadUsbEditor: React.FC<BadUsbEditorProps> = ({ text, onChangeText }
           results.push({
             lineNum: idx + 1,
             type: 'error',
-            message: `Le délai doit être un nombre entier positif.`
+            message: `Delay must be a positive integer.`
           });
         }
       }
@@ -73,7 +73,7 @@ export const BadUsbEditor: React.FC<BadUsbEditorProps> = ({ text, onChangeText }
           results.push({
             lineNum: idx + 1,
             type: 'warning',
-            message: `Format USB ID recommandé: VID:PID (ex: 1234:abcd).`
+            message: `Recommended USB ID format: VID:PID (e.g. 1234:abcd).`
           });
         }
       }
@@ -135,7 +135,7 @@ export const BadUsbEditor: React.FC<BadUsbEditorProps> = ({ text, onChangeText }
             height: '100%',
             overflowY: 'auto'
           }}
-          placeholder="Saisissez votre script BadUSB (Duckyscript) ici...&#10;Exemple:&#10;REM Mon Script&#10;DELAY 500&#10;GUI r&#10;DELAY 200&#10;STRING notepad.exe&#10;ENTER"
+          placeholder="Enter your BadUSB script (Duckyscript) here...&#10;Example:&#10;REM My Script&#10;DELAY 500&#10;GUI r&#10;DELAY 200&#10;STRING notepad.exe&#10;ENTER"
         />
       </div>
 
@@ -149,7 +149,7 @@ export const BadUsbEditor: React.FC<BadUsbEditorProps> = ({ text, onChangeText }
             style={{ flex: 1 }}
             onClick={() => setActiveTab('cheat')}
           >
-            Aide (Cheat Sheet)
+            Help (Cheat Sheet)
           </button>
           <button 
             className={`mode-btn ${activeTab === 'errors' ? 'active' : ''}`}
@@ -171,34 +171,34 @@ export const BadUsbEditor: React.FC<BadUsbEditorProps> = ({ text, onChangeText }
             <div className="panel" style={{ gap: '0.5rem' }}>
               <h4 style={{ color: 'var(--accent-cyan)', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <HelpCircle size={16} />
-                Commandes Clés
+                Key Commands
               </h4>
               <div style={{ fontSize: '0.75rem', lineHeight: '1.4', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <div><code>REM &lt;commentaire&gt;</code> : Ligne ignorée par l'interpréteur.</div>
-                <div><code>DELAY &lt;ms&gt;</code> : Pause l'exécution (ex: <code>DELAY 500</code>).</div>
-                <div><code>STRING &lt;texte&gt;</code> : Tape le texte spécifié.</div>
-                <div><code>STRINGLN &lt;texte&gt;</code> : Tape le texte et appuie sur Entrée.</div>
-                <div><code>ENTER</code> / <code>SPACE</code> / <code>TAB</code> : Touches spéciales.</div>
-                <div><code>ESCAPE</code> / <code>BACKSPACE</code> / <code>DELETE</code> : Touches d'effacement.</div>
+                <div><code>REM &lt;comment&gt;</code>: Line ignored by the interpreter.</div>
+                <div><code>DELAY &lt;ms&gt;</code>: Pause execution (e.g. <code>DELAY 500</code>).</div>
+                <div><code>STRING &lt;text&gt;</code>: Types the specified text.</div>
+                <div><code>STRINGLN &lt;text&gt;</code>: Types the text and presses Enter.</div>
+                <div><code>ENTER</code> / <code>SPACE</code> / <code>TAB</code>: Special keys.</div>
+                <div><code>ESCAPE</code> / <code>BACKSPACE</code> / <code>DELETE</code>: Deletion keys.</div>
               </div>
             </div>
 
             <div className="panel" style={{ gap: '0.5rem' }}>
-              <h4 style={{ color: 'var(--accent-purple)', fontSize: '0.85rem' }}>Raccourcis & Modificateurs</h4>
+              <h4 style={{ color: 'var(--accent-purple)', fontSize: '0.85rem' }}>Shortcuts & Modifiers</h4>
               <div style={{ fontSize: '0.75rem', lineHeight: '1.4', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <div><code>GUI</code> / <code>WINDOWS</code> : Touche Système (Windows/Cmd Mac).</div>
-                <div><code>CTRL</code> / <code>SHIFT</code> / <code>ALT</code> : Touches de modification.</div>
-                <div>Combinaisons multiples : <code>CTRL-ALT-DELETE</code> ou <code>ALT-TAB</code>.</div>
+                <div><code>GUI</code> / <code>WINDOWS</code>: System Key (Windows/Mac Cmd).</div>
+                <div><code>CTRL</code> / <code>SHIFT</code> / <code>ALT</code>: Modifier keys.</div>
+                <div>Multiple combinations: <code>CTRL-ALT-DELETE</code> ou <code>ALT-TAB</code>.</div>
               </div>
             </div>
 
             <div className="panel" style={{ gap: '0.5rem' }}>
-              <h4 style={{ color: 'var(--accent-orange)', fontSize: '0.85rem' }}>Commandes Flipper Avancées</h4>
+              <h4 style={{ color: 'var(--accent-orange)', fontSize: '0.85rem' }}>Advanced Flipper Commands</h4>
               <div style={{ fontSize: '0.75rem', lineHeight: '1.4', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <div><code>ID &lt;VID:PID&gt; &lt;Product&gt;</code> : Définit l'identité USB en ligne 1.</div>
-                <div><code>WAIT_FOR_BUTTON_PRESS</code> : Suspend jusqu'au clic sur Flipper.</div>
-                <div><code>MOUSEMOVE &lt;x&gt; &lt;y&gt;</code> : Déplacement souris.</div>
-                <div><code>LEFTCLICK</code> / <code>RIGHTCLICK</code> : Clics souris.</div>
+                <div><code>ID &lt;VID:PID&gt; &lt;Product&gt;</code>: Sets the USB identity on line 1.</div>
+                <div><code>WAIT_FOR_BUTTON_PRESS</code>: Suspends until Flipper button press.</div>
+                <div><code>MOUSEMOVE &lt;x&gt; &lt;y&gt;</code>: Mouse movement.</div>
+                <div><code>LEFTCLICK</code> / <code>RIGHTCLICK</code>: Mouse clicks.</div>
               </div>
             </div>
           </div>
@@ -207,13 +207,13 @@ export const BadUsbEditor: React.FC<BadUsbEditorProps> = ({ text, onChangeText }
         {/* Contenu Onglet : Validation */}
         {activeTab === 'errors' && (
           <div className="panel">
-            <h4 style={{ fontSize: '0.85rem' }}>Rapport d'analyse syntaxique</h4>
+            <h4 style={{ fontSize: '0.85rem' }}>Syntax Analysis Report</h4>
             
             {validationResults.length === 0 ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', padding: '1rem 0', color: 'var(--accent-green)' }}>
                 <CheckCircle size={32} />
-                <span style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>Aucune erreur détectée !</span>
-                <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Le script est prêt à être exécuté.</span>
+                <span style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>No errors detected!</span>
+                <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>The script is ready to execute.</span>
               </div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '60vh', overflowY: 'auto' }}>
@@ -234,7 +234,7 @@ export const BadUsbEditor: React.FC<BadUsbEditorProps> = ({ text, onChangeText }
                   >
                     <div style={{ fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '4px' }}>
                       <AlertTriangle size={12} />
-                      Ligne {err.lineNum} ({err.type === 'error' ? 'Erreur' : 'Avertissement'})
+                      Ligne {err.lineNum} ({err.type === 'error' ? 'Error' : 'Warning'})
                     </div>
                     <div>{err.message}</div>
                   </div>

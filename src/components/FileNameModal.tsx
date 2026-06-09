@@ -71,7 +71,7 @@ export const FileNameModal: React.FC<FileNameModalProps> = ({
             className="btn btn-icon"
             onClick={onCancel}
             style={{ border: 'none', background: 'transparent', padding: '4px', cursor: 'pointer', color: 'var(--text-secondary)' }}
-            aria-label="Fermer"
+            aria-label="Close"
           >
             <X size={16} />
           </button>
@@ -100,16 +100,16 @@ export const FileNameModal: React.FC<FileNameModalProps> = ({
 
         {enforceExtension && (
           <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-            Extension <code>{enforceExtension}</code> ajoutée automatiquement si omise.
+            Extension <code>{enforceExtension}</code> added automatically if omitted.
           </div>
         )}
 
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.6rem' }}>
           <button className="btn" onClick={onCancel}>
-            Annuler
+            Cancel
           </button>
           <button className="btn btn-primary" onClick={submit} disabled={!value.trim()}>
-            Enregistrer
+            Save
           </button>
         </div>
       </div>
